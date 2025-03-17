@@ -1,15 +1,14 @@
 package com.mobylab.springbackend.config.security;
 
 import com.mobylab.springbackend.entity.Role;
-import com.mobylab.springbackend.entity.User;
 import com.mobylab.springbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -24,9 +23,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepository.findUserByEmail(email);
+        Optional<com.mobylab.springbackend.entity.User> optionalUser = userRepository.findUserByEmail(email);
         if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
+            com.mobylab.springbackend.entity.User user = optionalUser.get();
             return new User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
         } else
             throw new UsernameNotFoundException("User not found");
