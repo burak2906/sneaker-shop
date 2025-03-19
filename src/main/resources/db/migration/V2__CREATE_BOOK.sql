@@ -1,4 +1,4 @@
-SET search_path = auth_server, pg_catalog;
+SET search_path = project, pg_catalog;
 
 CREATE TABLE book (
                       id uuid,

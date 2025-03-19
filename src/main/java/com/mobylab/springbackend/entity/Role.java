@@ -9,8 +9,8 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "roles", schema = "auth_server")
-@SequenceGenerator(name = "roles_seq", sequenceName = "auth_server.roles_seq", allocationSize = 1)
+@Table(name = "roles", schema = "project")
+@SequenceGenerator(name = "roles_seq", sequenceName = "project.roles_seq", allocationSize = 1)
 public class Role {
 
     @Id

@@ -1,5 +1,5 @@
-CREATE SCHEMA auth_server;
-SET search_path = auth_server, pg_catalog;
+CREATE SCHEMA project;
+SET search_path = project, pg_catalog;
 
 CREATE SEQUENCE roles_seq START WITH 3 INCREMENT BY 1;
 
@@ -21,8 +21,8 @@ CREATE TABLE user_role (
     user_id uuid NOT NULL,
     role_id integer NOT NULL,
     PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (user_id) REFERENCES auth_server.users (id),
-    FOREIGN KEY (role_id) REFERENCES auth_server.roles (id)
+    FOREIGN KEY (user_id) REFERENCES project.users (id),
+    FOREIGN KEY (role_id) REFERENCES project.roles (id)
 );
 
 INSERT INTO roles (id, name)
