@@ -1,16 +1,6 @@
 package com.mobylab.springbackend.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +19,13 @@ public class User {
     private String email;
     @Column(name = "password")
     private String password;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Cart cart;
+
+    @OneToMany(mappedBy = "reviewer")
+    private List<Review> reviews;
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", schema = "project", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -79,4 +76,22 @@ public class User {
         this.roles = roles;
         return this;
     }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public User setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+        return this;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+    public User setCart(Cart cart) {
+        this.cart = cart;
+        return this;
+    }
+
 }

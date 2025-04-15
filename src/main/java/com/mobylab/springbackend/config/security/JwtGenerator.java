@@ -37,13 +37,13 @@ public class JwtGenerator {
                 .setIssuedAt(new Date())
                 .setIssuer("http://localhost:8090")
                 .setExpiration(expireDate)
-                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
+                .signWith(SignatureAlgorithm.HS512, JWT_SECRET.getBytes())
                 .compact();
     }
 
     public String getUsernameFromJWT(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(JWT_SECRET)
+                .setSigningKey(JWT_SECRET.getBytes())
                 .parseClaimsJws(token)
                 .getBody();
         return claims.getSubject();
@@ -51,7 +51,7 @@ public class JwtGenerator {
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(JWT_SECRET.getBytes()).parseClaimsJws(token);
             return true;
         } catch (Exception ex) {
             throw new AuthenticationCredentialsNotFoundException("JWT was expired or incorrect");

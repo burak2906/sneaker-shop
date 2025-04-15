@@ -33,5 +33,17 @@ public class GlobalExceptionHandler {
                 .setTimestamp(LocalDateTime.now());
         return new ResponseEntity<>(errorObject, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler({ResourceNotFoundException.class})
+    public ResponseEntity<ErrorObject> handleNotFound(RuntimeException ex, WebRequest request) {
+        ErrorObject errorObject = new ErrorObject();
+
+        errorObject
+                .setStatusCode(HttpStatus.NOT_FOUND.value())
+                .setMessage(ex.getMessage())
+                .setTimestamp(LocalDateTime.now());
+
+        return new ResponseEntity<>(errorObject, HttpStatus.NOT_FOUND);
+    }
+
 
 }

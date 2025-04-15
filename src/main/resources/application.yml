@@ -2,7 +2,7 @@ spring:
   application:
     name: project
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5442/postgres
     username: postgres
     password: postgres
   jpa:
@@ -22,7 +22,18 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
+  mail:
+    host: smtp.mailtrap.io
+    port: 587
+    username: 613bebabcc96f6
+    password: 0229e01c5def11
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 vars:
   security:
     enable: true
@@ -31,8 +42,8 @@ server:
   port: 8090
 
 token:
-  ttl: 3600000
-  secret: "https://www.youtube.com/watch?v=VBUMYOYJISc"
+  secret: 0db5d3d3d977c09e15f1317a29a1db90cda7672578ffb67fb8cfbfc8641f3439fa49abc08c11832c3fde97df28037ea34b796cd6299d0cef3d774c33a3f3545e72d2c3bb699915c00eddbf803a37f24057ae55a4a95592a019281df3db98f6c9c1bb6b0fe95eb9c8ef808806c5ca7a4b7c250f9a3b8ae9e2fb7c6b5801b9f03987ae3d48b8f9d324fc95cdab9b0ab3d7dfdfa1e64d1175c0ac6a5d2f31709b5e2fdebe9e75ebe85280e2d8af196f13ac429e0e318dc514b9e4786e05719806252566c895c54275fdf3abf4a8e6d296389f66735816e4ec238799038867e2cb23773bc23b1340aa1d9756f4c4c61590dbd61ccca6b42f22e1e3be1932e54f1f92
+  ttl: 86400000 # 1 zi în milisecunde
 
 admin:
   username: admin
